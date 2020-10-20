@@ -8,12 +8,7 @@ and is tested in Linux environment (Tensorflow: 1.10.0, CUDA9.0) with GTX 1080 G
 ## Citation
 If you find our code helpful in your resarch or work, please cite our paper.
 ```
-<!-- @article{chen2018theoretical,
-  title={Theoretical Linear Convergence of Unfolded ISTA and its Practical Weights and Thresholds},
-  author={Chen, Xiaohan and Liu, Jialin and Wang, Zhangyang and Yin, Wotao},
-  journal={arXiv preprint arXiv:1808.10038},
-  year={2018}
-} -->
+
 ```
 ## Testing
 - Test NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
