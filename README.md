@@ -1,6 +1,6 @@
 # Learning Fast Approximations of Sparse Nonlinear Regression
 This repository has the code corresponding to the Paper 
-"[Learning Fast Approximations of Sparse Nonlinear Regression](http://people.tamu.edu/~chernxh)".
+"[Learning Fast Approximations of Sparse Nonlinear Regression]()".
 
 The code is based on the LISTA-CPSS repository (https://github.com/xchen-tamu/linear-lista-cpss)
 and is tested in Linux environment (Tensorflow: 1.10.0, CUDA9.0) with GTX 1080 GPU.
@@ -8,12 +8,12 @@ and is tested in Linux environment (Tensorflow: 1.10.0, CUDA9.0) with GTX 1080 G
 ## Citation
 If you find our code helpful in your resarch or work, please cite our paper.
 ```
-@article{chen2018theoretical,
+<!-- @article{chen2018theoretical,
   title={Theoretical Linear Convergence of Unfolded ISTA and its Practical Weights and Thresholds},
   author={Chen, Xiaohan and Liu, Jialin and Wang, Zhangyang and Yin, Wotao},
   journal={arXiv preprint arXiv:1808.10038},
   year={2018}
-}
+} -->
 ```
 ## Testing
 - Test NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
@@ -42,6 +42,7 @@ python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 30 -cond 0
 ```
 python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 'inf' -cond 50
 ```
+- For testing FISTA\FPCA\STELA, replace 'SpaRSA' with 'FISTA\FPCA\STELA'
 
 ## Training
 - Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
