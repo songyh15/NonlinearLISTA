@@ -16,23 +16,44 @@ If you find our code helpful in your resarch or work, please cite our paper.
 }
 ```
 ## Testing
-
+- Test NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
 ```
-python main.py -t -n 'NLISTA_cosx' -fun 'cosx' -T 16 -P 0.1 -S 'inf' -C 0.0 -task 'sc' 
--u -g 0 -xt './data/x_test_p0.1_1.npy' -l 0.4 -id 23
+python main.py -t -gpu 0 -id 23 -n 'NLISTA_cosx' -fun 'cosx' -S 'inf' -C 0.0 
+```
+- Test NLISTA in the case where the nonlinear function is 2x+cos(x) , signal-noise-radio(SNR) is 30dB and condition number is zero
+```
+python main.py -t -gpu 0 -id 23 -n 'NLISTA_cosx' -fun 'cosx' -S 30 -C 0.0 
+```
+- Test NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is 50
+```
+python main.py -t -gpu 0 -id 23 -n 'NLISTA_cosx' -fun 'cosx' -S 'inf' -C 50.0 
+```
+- For testing LISTA, replace 'NLISTA_cosx' with 'LISTA'.
 
+- Test SpaRSA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
+```
+python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 'inf' -cond 0
+```
+- Test SpaRSA in the case where the nonlinear function is 2x+cos(x) , signal-noise-radio(SNR) is 30dB and condition number is zero
+```
+python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 30 -cond 0
+```
+- Test SpaRSA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is 50
+```
+python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 'inf' -cond 50
 ```
 
 ## Training
-- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero, call
+- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
 ```
 python main.py -gpu 0 -id 0  -n 'NLISTA_cosx' -fun 'cosx' -S 'inf' -C 0.0 
 ```
-- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , signal-noise-radio(SNR) is 30dB and condition number is zero, call
+- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , signal-noise-radio(SNR) is 30dB and condition number is zero
 ```
 python main.py -gpu 0 -id 0  -n 'NLISTA_cosx' -fun 'cosx' -S 30 -C 0.0 
 ```
-- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is 50, call
+- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is 50
 ```
 python main.py -gpu 0 -id 0  -n 'NLISTA_cosx' -fun 'cosx' -S 'inf' -C 50.0 
 ```
+- For training LISTA, replace 'NLISTA_cosx' with 'LISTA'.
