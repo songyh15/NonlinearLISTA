@@ -1,6 +1,6 @@
 # Learning Fast Approximations of Sparse Nonlinear Regression
 This repository has the code corresponding to the Paper 
-"[Learning Fast Approximations of Sparse Nonlinear Regression\*](http://people.tamu.edu/~chernxh)".
+"[Learning Fast Approximations of Sparse Nonlinear Regression](http://people.tamu.edu/~chernxh)".
 
 The code is based on the LISTA-CPSS repository (https://github.com/xchen-tamu/linear-lista-cpss)
 and is tested in Linux environment (Tensorflow: 1.10.0, CUDA9.0) with GTX 1080 GPU.
@@ -24,15 +24,15 @@ python main.py -t -n 'NLISTA_cosx' -fun 'cosx' -T 16 -P 0.1 -S 'inf' -C 0.0 -tas
 ```
 
 ## Training
-For NLISTA with the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero, call
+- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero, call
 ```
 python main.py -gpu 0 -id 0  -n 'NLISTA_cosx' -fun 'cosx' -S 'inf' -C 0.0 
 ```
-For NLISTA with the case where the nonlinear function is 2x+cos(x) , signal-noise-radio(SNR) is 30dB and condition number is zero, call
+- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , signal-noise-radio(SNR) is 30dB and condition number is zero, call
 ```
 python main.py -gpu 0 -id 0  -n 'NLISTA_cosx' -fun 'cosx' -S 30 -C 0.0 
 ```
-For NLISTA with the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is 50, call
+- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is 50, call
 ```
 python main.py -gpu 0 -id 0  -n 'NLISTA_cosx' -fun 'cosx' -S 'inf' -C 50.0 
 ```
