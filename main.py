@@ -230,41 +230,6 @@ def run_sc_test (config) :
         # load model
         model.load_trainable_variables (sess , config.modelfn)
 
-        #  print weights
-        # print('.........theta........')
-        # for t in range (model._T):
-        #     B_, theta_1, theta_2 = model.vars_in_layer [t]          
-        #     print(sess.run(theta_2))
-        # print('.........beta........')
-        # for t in range (model._T):
-        #     B_, theta_1, theta_2 = model.vars_in_layer [t]          
-        #     print(sess.run(theta_1))
-        # print('.........WiAj........')
-        # for t in range (model._T):
-        #     B_, theta_1, theta_2 = model.vars_in_layer [t]      
-        #     WT =   sess.run(B_)
-        #     WTA = np.dot(WT,model._A)
-        #     print(np.max(WTA-5*np.eye(WTA.shape[0])))
-        # print('.........bataWiAj........')
-        # for t in range (model._T):
-        #     B_, theta_1, theta_2 = model.vars_in_layer [t]      
-        #     WT = sess.run(B_)
-        #     beta = sess.run(theta_1)
-        #     WTA = np.dot(WT,model._A)
-        #     print(beta[0]*np.max(WTA-5*np.eye(WTA.shape[0])))
-               
-
-        # ATA = np.dot(model._A.T,model._A)
-        # print(ATA.shape)
-        # print(np.max(ATA))
-        # print(np.max(ATA-np.eye(ATA.shape[0])))
-        # print(np.where((ATA - np.eye(ATA.shape[0])==np.max(ATA))))
-
-        # print('.........theta........')
-        # for t in range (model._T):
-        #     B_, theta_1, theta_2 = model.vars_in_layer [t]          
-        #     print(sess.run(theta_2))
-
         
         # x_test = sess.run(label_)
         # np.save( path, x_test )
@@ -315,14 +280,6 @@ def run_sc_test (config) :
             # false negative
             flsne = np.logical_and (supp_gt , np.logical_not (supp))
             lflsne.append (np.sum (flsne , axis=0))
-
-    res = dict (nmse=np.asarray  (lnmse),
-                spar=np.asarray  (lspar),
-                sperr=np.asarray (lsperr),
-                flspo=np.asarray (lflspo),
-                flsne=np.asarray (lflsne))
-
-    # np.savez (config.resfn , **res)
     # end of test
 
 ############################################################

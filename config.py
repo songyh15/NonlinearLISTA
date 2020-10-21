@@ -182,15 +182,15 @@ def get_config():
                                 config.function , config.M , config.N , config.con_num ,
                                 config.pnz , config.SNR ))
 
-    # make experiment base path and results base path
+    # make experiment base path
     setattr (config , 'expbase' , os.path.join (config.exp_folder,
                                                 config.prob_folder ) )
     setattr (config , 'resbase' , os.path.join (config.res_folder,
                                                 config.prob_folder))
     if not os.path.exists (config.expbase):
         os.mkdir (config.expbase)
-    if not os.path.exists (config.resbase):
-        os.mkdir (config.resbase)
+    # if not os.path.exists (config.resbase):
+    #     os.mkdir (config.resbase)
 
     """
     Problem file for sparse coding task.

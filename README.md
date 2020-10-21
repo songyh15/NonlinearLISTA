@@ -38,7 +38,7 @@ python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 'inf' -cond 50
 ## Training
 - Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
 ```
-python main.py -gpu 0 -id 0  -n 'NLISTA_2xcosx' -fun 'cosx' -S 'inf' -C 0.0 
+python main.py -gpu 0 -id 0  -n 'NLISTA_2xcosx' -fun '2xcosx' -S 'inf' -C 0.0 
 ```
 - For choosing other networks, set '-n' as 'LISTA\ NLISTA_10xcos2x\ NLISTA_10xcos3x\ NLISTA_10xcos4x'
 - For choosing other nonlinear functions, set '-fun' as '10xcos2x\ 10xcos3x\ 10xcos4x'
