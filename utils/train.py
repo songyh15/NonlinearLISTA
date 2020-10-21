@@ -162,13 +162,6 @@ def setup_sc_training (model, y_, x_, y_val_, x_val_, x0_,
         layer_info = "{scope} T={time}".format (scope=model._scope, time=t+1)
 
         # set up loss_ and nmse_
-
-        # kA_ = model._A
-        # yhs_  = 2*tf.matmul (kA_, xhs_ [t+1])+ 1 * tf.cos(tf.matmul (kA_, xhs_ [t+1]))
-        # loss_ = tf.nn.l2_loss (yhs_ - y_) + 0.2*tf.reduce_sum (tf.abs (xhs_ [t+1]))
-        # yhs_val_  = 2*tf.matmul (kA_, xhs_val_ [t+1])+ 1 * tf.cos(tf.matmul (kA_, xhs_val_ [t+1]))
-        # loss_val_ = tf.nn.l2_loss (yhs_val_ - y_val_) + 0.2*tf.reduce_sum (tf.abs (xhs_val_ [t+1]))
-
         loss_ = tf.nn.l2_loss (xhs_ [t+1] - x_)
         nmse_ = loss_ / nmse_denom_
         loss_val_ = tf.nn.l2_loss (xhs_val_ [t+1] - x_val_)
@@ -204,10 +197,8 @@ def setup_sc_training (model, y_, x_, y_val_, x_val_, x0_,
         for var in train_vars:
             lr_multiplier [var.op.name] *= decay_rate
             
-        # train_vars = [] # 只训练当层参数
-        # 调整训练策略
-        # if t == 10:
-        #     train_vars=[]
+        if t == 10:
+            train_vars=[]
 
     return training_stages
 
@@ -287,7 +278,6 @@ def do_training (sess, stages, savefn, scope, val_step, maxit, better_wait):
                 nmse_hist_val = np.append (nmse_hist_val, nmse_val)
                 db_best_val = 10. * np.log10 (nmse_hist_val.min())
                 db_val = 10. * np.log10 (nmse_val)
-                # 调整打印频率
                 if i % 500 == 0:
                     sys.stdout.write(
                             "\r| i={i:<7d} | loss_tr={loss_tr:.6f} | "
@@ -298,7 +288,6 @@ def do_training (sess, stages, savefn, scope, val_step, maxit, better_wait):
                                         db_best_val=db_best_val))
                     sys.stdout.flush()
                 if i % (100 * val_step) == 0:
-                    # print('')
                     age_of_best = (len(nmse_hist_val) -
                                    nmse_hist_val.argmin() - 1)
                     # If nmse has not improved for a long time, jump to the
