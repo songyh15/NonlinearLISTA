@@ -27,7 +27,7 @@ python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 'inf' -cond 0
 - For choosing other algorithms, set '-model' as 'FISTA\ FPCA\ STELA'
 - For choosing other nonlinear functions, set '-f' as '10xcos2x\ 10xcos3x\ 10xcos4x'
 - For choosing other noise levels, set '-SNR' as 30
-- For choosing other condition numbers, set '-cond' as 50.0
+- For choosing other condition numbers, set '-cond' as 50
 - For choosing other regularization parameters, modify '-mu'
 
 ## Training
