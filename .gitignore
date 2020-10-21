@@ -1,4 +1,4 @@
-# .history/
-# .vscode/
-# __pycache__/
-# train.sh
+.history/
+.vscode/
+__pycache__/
+train.sh
