@@ -11,6 +11,9 @@ If you find our code helpful in your resarch or work, please cite our paper.
 
 ```
 ## Testing
+The test data is stored in the folder './data'.
+The pretrained models are stored in the folder './experiments'.
+
 Test NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero:
 ```
 python main.py -t -gpu 0 -id 0 -n 'NLISTA_2xcosx' -fun '2xcosx' -S 'inf' -C 0.0 
