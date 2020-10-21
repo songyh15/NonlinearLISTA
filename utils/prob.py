@@ -1,15 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-"""
-file  : prob.py
-author: Xiaohan Chen
-email : chernxh@tamu.edu
-last_modified: 2018-10-03
-
-Define problem class that is used experiments.
-"""
-
 import os
 import numpy as np
 import numpy.linalg as la

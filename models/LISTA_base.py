@@ -1,15 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-LISTA_base.py
-author: xhchrn
-email : chernxh@tamu.edu
-date  : 2018-10-03
-
-A base class for all LISTA networks.
-"""
-
 import numpy as np
 import numpy.linalg as la
 import tensorflow as tf

@@ -23,48 +23,6 @@ except Exception as e :
     pass
 
 
-def imread_CS_py(im_fn, patch_size, stride):
-    im_org = np.array (Image.open (im_fn), dtype='float32')
-    H, W   = im_org.shape
-    num_rpatch = (H - patch_size + stride - 1) // stride + 1
-    num_cpatch = (W - patch_size + stride - 1) // stride + 1
-    H_pad = patch_size + (num_rpatch - 1) * stride
-    W_pad = patch_size + (num_cpatch - 1) * stride
-    im_pad = np.zeros ((H_pad, W_pad), dtype=np.float32)
-    im_pad [:H, :W] = im_org
-
-    return im_org, H, W, im_pad, H_pad, W_pad
-
-
-def img2col_py(im_pad, patch_size, stride):
-    [H, W] = im_pad.shape
-    num_rpatch = (H - patch_size) / stride + 1
-    num_cpatch = (W - patch_size) / stride + 1
-    num_patches = int (num_rpatch * num_cpatch)
-    img_col = np.zeros ([patch_size**2, num_patches])
-    count = 0
-    for x in range(0, H-patch_size+1, stride):
-        for y in range(0, W-patch_size+1, stride):
-            img_col[:, count] = im_pad[x:x+patch_size, y:y+patch_size].reshape([-1])
-            count = count + 1
-    return img_col
-
-
-def col2im_CS_py(X_col, patch_size, stride, H, W, H_pad, W_pad):
-    X0_rec = np.zeros ((H_pad, W_pad))
-    counts = np.zeros ((H_pad, W_pad))
-    k = 0
-    for x in range(0, H_pad-patch_size+1, stride):
-        for y in range(0, W_pad-patch_size+1, stride):
-            X0_rec[x:x+patch_size, y:y+patch_size] += X_col[:,k].\
-                    reshape([patch_size, patch_size])
-            counts[x:x+patch_size, y:y+patch_size] += 1
-            k = k + 1
-    X0_rec /= counts
-    X_rec = X0_rec[:H, :W]
-    return X_rec
-
-
 def setup_model (config , **kwargs) :
     untiedf = 'u' if config.untied else 't'
     coordf  = 'c' if config.coord  else 's'
@@ -196,30 +154,17 @@ def run_sc_test (config) :
 
     """Load testing data."""
     xt = np.load (config.xtest)
-    # xt = xt[:,0:15*64]
     nmse_denom = np.sum (np.square (xt))
 
     """Set up input for testing."""
     config.SNR = np.inf if config.SNR == 'inf' else float (config.SNR)
-    # input_, label_ = (train.setup_input_sc (config.test, p, 64, None, False,
-    #                           config.supp_prob, config.SNR,
-    #                           config.magdist, **config.distargs))
     input_, label_ = (train.setup_input_sc (config.test, p, xt.shape [1], None, False,
                               config.supp_prob, config.SNR,
                               config.magdist,config.function, **config.distargs))
     
     """Set up model."""
     model = setup_model (config , A=p.A)
-    xhs_ = model.inference (input_, None)
-     
-    # """ """
-    # nmse_ = []
-    # nmse_.append (tf.ones(1))
-    # nmse_denom_  = tf.nn.l2_loss (label_)
-    # for t in range (model._T):
-    #     loss_ = tf.nn.l2_loss (xhs_ [t+1] - label_)
-    #     nmse_.append( loss_ / nmse_denom_ )
-        
+    xhs_ = model.inference (input_, None)        
 
     """Create session and initialize the graph."""
     tfconfig = tf.ConfigProto (allow_soft_placement=True)
@@ -230,56 +175,17 @@ def run_sc_test (config) :
         # load model
         model.load_trainable_variables (sess , config.modelfn)
 
-        
-        # x_test = sess.run(label_)
-        # np.save( path, x_test )
-        
         supp_gt = xt != 0
-        # supp_gt = x_test != 0
-    
-        lnmse  = []
-        lspar  = []
-        lsperr = []
-        lflspo = []
-        lflsne = []
         
       # test model
+        lay = 0
         for xh_ in xhs_ :
             xh = sess.run (xh_ , feed_dict={label_:xt})
-            # xh = sess.run (xh_ , feed_dict={label_:x_test})
-
-            # xh = np.zeros(xt.shape)
-            # for i in range(15):
-            #     x_now = xt[:, i*64:(i+1)*64]
-            #     xh[:,i*64:(i+1)*64] = sess.run (xh_ , feed_dict={label_:x_now})
-
-    
             # nmse:
             loss = np.sum (np.square (xh - xt))
             nmse_dB = 10.0 * np.log10 (loss / nmse_denom)
-            
-            # nmse = sess.run(nmse_[i])
-            # nmse_dB = 10.0 * np.log10 (nmse)
-
-            print (nmse_dB)
-            lnmse.append (nmse_dB)
-
-            supp = xh != 0.0
-            # intermediate sparsity
-            spar = np.sum (supp , axis=0)
-            lspar.append (spar)
-
-            # support error
-            sperr = np.logical_xor(supp, supp_gt)
-            lsperr.append (np.sum (sperr , axis=0))
-
-            # false positive
-            flspo = np.logical_and (supp , np.logical_not (supp_gt))
-            lflspo.append (np.sum (flspo , axis=0))
-
-            # false negative
-            flsne = np.logical_and (supp_gt , np.logical_not (supp))
-            lflsne.append (np.sum (flsne , axis=0))
+            print ('layer '+str(lay)+': '+str(nmse_dB))
+            lay += 1
     # end of test
 
 ############################################################

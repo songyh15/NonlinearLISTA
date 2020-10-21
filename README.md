@@ -11,7 +11,7 @@ If you find our code helpful in your resarch or work, please cite our paper.
 
 ```
 ## Testing
-### Test NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
+Test NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero:
 ```
 python main.py -t -gpu 0 -id 0 -n 'NLISTA_2xcosx' -fun '2xcosx' -S 'inf' -C 0.0 
 ```
@@ -20,23 +20,18 @@ python main.py -t -gpu 0 -id 0 -n 'NLISTA_2xcosx' -fun '2xcosx' -S 'inf' -C 0.0
 - For choosing other noise levels, set '-S' as 30
 - For choosing other condition numbers, set '-C' as 50.0
 
-
-- Test SpaRSA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
+Test SpaRSA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero:
 ```
 python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 'inf' -cond 0
 ```
-- Test SpaRSA in the case where the nonlinear function is 2x+cos(x) , signal-noise-radio(SNR) is 30dB and condition number is zero
-```
-python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 30 -cond 0
-```
-- Test SpaRSA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is 50
-```
-python ISTA.py -model 'SpaRSA' -f '2xcosx' -mu 0.5 -SNR 'inf' -cond 50
-```
-- For testing FISTA\FPCA\STELA, replace 'SpaRSA' with 'FISTA\FPCA\STELA'
+- For choosing other algorithms, set '-model' as 'FISTA\ FPCA\ STELA'
+- For choosing other nonlinear functions, set '-f' as '10xcos2x\ 10xcos3x\ 10xcos4x'
+- For choosing other noise levels, set '-SNR' as 30
+- For choosing other condition numbers, set '-cond' as 50.0
+- For choosing other regularization parameters, modify '-mu'
 
 ## Training
-- Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero
+Train NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero:
 ```
 python main.py -gpu 0 -id 0  -n 'NLISTA_2xcosx' -fun '2xcosx' -S 'inf' -C 0.0 
 ```

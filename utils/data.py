@@ -1,15 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-"""
-file  : data.py
-author: Xiaohan Chen
-email : chernxh@tamu.edu
-last_modified: 2018-10-16
-
-Utility methods for the real world images compressive sensing experiments.
-"""
-
 import os
 import glob
 import numpy as np

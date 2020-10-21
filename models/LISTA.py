@@ -1,15 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-file  : LISTA.py
-author: Xiaohan Chen
-email : chernxh@tamu.edu
-last_modified : 2018-10-21
-
-Implementation of Learned ISTA proposed by LeCun et al in 2010.
-"""
-
 import numpy as np
 import tensorflow as tf
 import utils.train

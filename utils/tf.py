@@ -1,22 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-file  : utils/tf.py
-author: Xiaohan Chen
-email : chernxh@tamu.edu
-last_modified: 2018-10-04
-
-Utility functions implemented in TensorFlow, including:
-    - shrinkage functions
-    - circular padding
-    - activations
-    - subgradient functions
-    - related functions
-"""
-
 import tensorflow as tf
-
 
 ############################################################
 ####################   Shrinkage   #########################
