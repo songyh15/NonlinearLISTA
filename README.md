@@ -1,6 +1,6 @@
 # Learning Fast Approximations of Sparse Nonlinear Regression
 This repository has the code corresponding to the Paper 
-"[Learning Fast Approximations of Sparse Nonlinear Regression]()".
+"[Learning Fast Approximations of Sparse Nonlinear Regression](https://arxiv.org/abs/2010.13490)".
 
 The code is based on the LISTA-CPSS repository (https://github.com/xchen-tamu/linear-lista-cpss)
 and is tested in Linux environment (Tensorflow: 1.10.0, CUDA9.0) with GTX 1080 GPU.
@@ -8,11 +8,16 @@ and is tested in Linux environment (Tensorflow: 1.10.0, CUDA9.0) with GTX 1080 G
 ## Citation
 If you find our code helpful in your resarch or work, please cite our paper.
 ```
-
+@article{Song2020learning,
+  title={Learning Fast Approximations of Sparse Nonlinear Regression},
+  author={Song, Yuhai and Cao, Zhong and Wu, Kailun and Yan, Ziang and Zhang, Changshui},
+  journal={arXiv preprint arXiv:2010.13490},
+  year={2020}
+}
 ```
 ## Testing
 The test data is stored in the folder './data'.
-The pretrained models are stored in the folder './experiments'.
+The trained models are stored in the folder './experiments'.
 
 Test NLISTA in the case where the nonlinear function is 2x+cos(x) , no noise exists and condition number is zero:
 ```
